@@ -14,17 +14,27 @@
     body {
       color: #222;
       background-color: #f9f9fb;
+      overflow-x: hidden;
     }
+
+    /* ---------- HEADER ---------- */
     header {
-      background: #0b3d91;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(11, 61, 145, 0.9);
       color: white;
-      padding: 1.5rem 3rem;
+      padding: 1.2rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
     }
     header h1 {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
     }
     nav a {
       color: white;
@@ -36,30 +46,82 @@
     nav a:hover {
       opacity: 0.8;
     }
+
+    /* ---------- HERO ---------- */
     .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       padding: 5rem 2rem;
       background: linear-gradient(to bottom right, #0b3d91, #163fa1);
       color: white;
+      position: relative;
+      overflow: hidden;
     }
     .hero h2 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeIn 1.8s ease forwards;
     }
     .hero p {
-      max-width: 600px;
+      max-width: 650px;
       margin: 0 auto;
       line-height: 1.6;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      opacity: 0;
+      animation: fadeIn 2s ease 0.5s forwards;
     }
+    .btn {
+      display: inline-block;
+      background: white;
+      color: #0b3d91;
+      padding: 0.8rem 1.6rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 1.8rem;
+      transition: background 0.2s ease, color 0.2s ease;
+      opacity: 0;
+      animation: fadeIn 2s ease 1s forwards;
+    }
+    .btn:hover {
+      background: #f1f1f1;
+      color: #072c6b;
+    }
+
+    /* Fade away hero as you scroll */
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(11, 61, 145, 0) 50%, #f9f9fb 100%);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ---------- SECTIONS ---------- */
     section {
-      padding: 4rem 2rem;
+      padding: 5rem 2rem;
       max-width: 1000px;
       margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     section h3 {
       color: #0b3d91;
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       margin-bottom: 1.5rem;
       text-align: center;
     }
@@ -76,40 +138,36 @@
       margin-top: 1.5rem;
     }
     .socials-icons a img {
-      width: 40px;
-      height: 40px;
-      transition: transform 0.2s ease;
+      width: 42px;
+      height: 42px;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      filter: grayscale(100%) brightness(90%);
     }
     .socials-icons a img:hover {
       transform: scale(1.1);
+      filter: none;
     }
+
+    /* ---------- FOOTER ---------- */
     .footer {
       background: #0b3d91;
       color: white;
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
+      margin-top: 3rem;
     }
-    .btn {
-      display: inline-block;
-      background: white;
-      color: #0b3d91;
-      padding: 0.7rem 1.5rem;
-      border-radius: 4px;
-      font-weight: 600;
-      text-decoration: none;
-      margin-top: 1.5rem;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .btn:hover {
-      background: #f1f1f1;
-      color: #072c6b;
+
+    /* ---------- ANIMATIONS ---------- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>AAIAA SMC Student Branch</h1>
+    <h1>AIAA SMC Student Branch</h1>
     <nav>
       <a href="#about">About</a>
       <a href="#socials">Socials</a>
@@ -144,7 +202,7 @@
 
   <section id="events" class="events">
     <h3>Upcoming Events</h3>
-    <p>Monthly meetings every first XXXXX at XX:XX PM in XXX XXX.<br><br>Design and Build Workshop — coming soon!<br><br>Guest Speaker Series — featuring engineers from XXXX and XXXX, Spring 2026.</p>
+    <p>Monthly meetings every first Friday at 3:00 PM in SCI 140.<br><br>Design and Build Workshop — coming soon!<br><br>Guest Speaker Series — featuring engineers from SpaceX and NASA, Spring 2026.</p>
   </section>
 
   <section id="contact" class="contact">
@@ -153,7 +211,23 @@
   </section>
 
   <footer class="footer">
-    <p>© 2025 AAIAA SMC Student Branch | Santa Monica College</p>
+    <p>© 2025 AIAA SMC Student Branch | Santa Monica College</p>
   </footer>
+
+  <script>
+    // Scroll fade-in animation
+    const sections = document.querySelectorAll('section');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const boxTop = section.getBoundingClientRect().top;
+        if (boxTop < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // run once on load
+  </script>
 </body>
 </html>
