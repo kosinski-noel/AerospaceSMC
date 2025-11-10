@@ -17,27 +17,47 @@
       overflow-x: hidden;
     }
 
-    /* ---------- HEADER ---------- */
-    header img {
-      height: 55px;
-      width: auto;
-      object-fit: contain;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    header img:hover {
-      transform: scale(1.05);
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: 500;
-      transition: opacity 0.2s ease;
-    }
-    nav a:hover {
-      opacity: 0.8;
-    }
+/* ---------- HEADER ---------- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(11, 61, 145, 0.95);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 2rem;
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+}
+
+/* logo on top left */
+header .logo img {
+  height: 38px;       /* smaller logo */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin-top: 4px;    /* nudges logo down a little for alignment */
+}
+
+header .logo img:hover {
+  transform: scale(1.05);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+nav a:hover {
+  opacity: 0.8;
+}
 
 
     /* ---------- HERO ---------- */
