@@ -11,20 +11,36 @@
       box-sizing: border-box;
       font-family: 'Helvetica Neue', sans-serif;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       color: #222;
       background-color: #f9f9fb;
+      overflow-x: hidden;
     }
     header {
-      background: #0b3d91;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(11, 61, 145, 0.9);
       color: white;
       padding: 1rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 10;
+      backdrop-filter: blur(6px);
     }
     header img {
-      height: 50px;
+      height: 70px;
+      width: auto;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+    header img:hover {
+      transform: scale(1.05);
     }
     nav a {
       color: white;
@@ -36,44 +52,90 @@
     nav a:hover {
       opacity: 0.8;
     }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .hero {
       text-align: center;
-      padding: 5rem 2rem;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(to bottom right, #0b3d91, #163fa1);
       color: white;
+      position: relative;
+      overflow: hidden;
     }
     .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards 0.3s;
     }
     .hero p {
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 2rem auto 0;
+      line-height: 1.8;
+      font-size: 1.15rem;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards 0.8s;
     }
+    .btn {
+      display: inline-block;
+      background: white;
+      color: #0b3d91;
+      padding: 0.8rem 1.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 2.5rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards 1.2s;
+    }
+    .btn:hover {
+      background: #f1f1f1;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     section {
-      padding: 4rem 2rem;
+      padding: 6rem 2rem;
       max-width: 1000px;
       margin: 0 auto;
     }
     section h3 {
       color: #0b3d91;
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      margin-bottom: 2rem;
       text-align: center;
     }
     .about p, .events p, .contact p, .socials p {
       text-align: center;
-      line-height: 1.6;
-      font-size: 1.05rem;
+      line-height: 1.7;
+      font-size: 1.1rem;
       color: #444;
     }
     .collage {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
     .collage div {
       background-color: #dfe6f0;
@@ -82,9 +144,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 150px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      height: 160px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .collage div:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
     .socials-icons {
       display: flex;
@@ -93,34 +160,20 @@
       margin-top: 1.5rem;
     }
     .socials-icons a img {
-      width: 40px;
-      height: 40px;
-      transition: transform 0.2s ease;
+      width: 45px;
+      height: 45px;
+      transition: transform 0.3s ease;
     }
     .socials-icons a img:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
     .footer {
       background: #0b3d91;
       color: white;
       text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-    }
-    .btn {
-      display: inline-block;
-      background: white;
-      color: #0b3d91;
-      padding: 0.7rem 1.5rem;
-      border-radius: 4px;
-      font-weight: 600;
-      text-decoration: none;
-      margin-top: 1.5rem;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .btn:hover {
-      background: #f1f1f1;
-      color: #072c6b;
+      padding: 1.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
     }
   </style>
 </head>
@@ -141,7 +194,7 @@
     <a href="#about" class="btn">Learn More</a>
   </div>
 
-  <section id="about" class="about">
+  <section id="about" class="about fade-in">
     <h3>About Us</h3>
     <p>The Aerospace SMC Club is a student-led organization passionate about all things aerospace. We collaborate on hands-on projects, connect with industry professionals, and inspire the next generation of engineers and explorers.</p>
 
@@ -153,7 +206,7 @@
     </div>
   </section>
 
-  <section id="socials" class="socials">
+  <section id="socials" class="socials fade-in">
     <h3>Connect With Us</h3>
     <p>Stay in touch and join our online community:</p>
     <div class="socials-icons">
@@ -166,18 +219,32 @@
     </div>
   </section>
 
-  <section id="events" class="events">
+  <section id="events" class="events fade-in">
     <h3>Upcoming Events</h3>
-    <p> Monthly meetings every first Friday at XX:XX PM in BLD XXX.<br><br> Design and Build Workshop — coming soon!<br><br> Guest Speaker Series — featuring engineers from XXXX and XXXX, Spring 2026.</p>
+    <p>Monthly meetings every first Friday at XX:XX PM in BLD XXX.<br><br>Design and Build Workshop — coming soon!<br><br>Guest Speaker Series — featuring engineers from XXXX and XXXX, Spring 2026.</p>
   </section>
 
-  <section id="contact" class="contact">
+  <section id="contact" class="contact fade-in">
     <h3>Contact Us</h3>
-    <p> Reach out to us at <a href="mailto:aiaa.smc.student.branch@gmail.com">aiaa.smc.student.branch@gmail.com</a> or follow us on Instagram @AIAA.SMC</p>
+    <p>Reach out to us at <a href="mailto:aiaa.smc.student.branch@gmail.com">aiaa.smc.student.branch@gmail.com</a> or follow us on Instagram @AIAA.SMC</p>
   </section>
 
   <footer class="footer">
     <p>© 2025 Aerospace SMC Club | Santa Monica College</p>
   </footer>
+
+  <script>
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    faders.forEach(fade => observer.observe(fade));
+  </script>
 </body>
 </html>
