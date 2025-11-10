@@ -1,110 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIAA SMC Student Branch</title>
   <title>Aerospace SMC Club</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-    body {
-      color: #222;
-      background-color: #f9f9fb;
-      overflow-x: hidden;
-    }
-
-/* ---------- HEADER ---------- */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(11, 61, 145, 0.95);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.4rem 2rem;
-  z-index: 1000;
-  backdrop-filter: blur(6px);
+<style>
+* {
+margin: 0;
+@@ -23,15 +23,14 @@
+top: 0;
+left: 0;
+width: 100%;
+      background: rgba(11, 61, 145, 0.95);
+      background: rgba(11, 61, 145, 0.9);
+color: white;
+padding: 1.2rem 3rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 1000;
+backdrop-filter: blur(6px);
+      transition: background 0.3s ease;
 }
-
-/* logo on top left */
-header .logo img {
-  height: 38px;       /* smaller logo */
-  width: auto;
-  display: block;
-  object-fit: contain;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  margin-top: 4px;    /* nudges logo down a little for alignment */
-}
-
-header .logo img:hover {
-  transform: scale(1.05);
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 1.5rem;
-  font-weight: 500;
-  transition: opacity 0.2s ease;
-}
-
-nav a:hover {
-  opacity: 0.8;
-}
-
-
-    /* ---------- HERO ---------- */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 5rem 2rem;
+header h1 {
+font-size: 1.4rem;
+@@ -57,9 +56,10 @@
+align-items: center;
+text-align: center;
+padding: 5rem 2rem;
+      background: #0b3d91;
       background: linear-gradient(to bottom right, #0b3d91, #163fa1);
-      color: white;
+color: white;
+      transition: background 0.8s ease-out;
       position: relative;
       overflow: hidden;
-    }
-    .hero h2 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeIn 1.8s ease forwards;
-    }
-    .hero p {
-      max-width: 650px;
-      margin: 0 auto;
-      line-height: 1.6;
-      font-size: 1.15rem;
-      opacity: 0;
-      animation: fadeIn 2s ease 0.5s forwards;
-    }
-    .btn {
-      display: inline-block;
-      background: white;
-      color: #0b3d91;
-      padding: 0.8rem 1.6rem;
-      border-radius: 4px;
-      font-weight: 600;
-      text-decoration: none;
-      margin-top: 1.8rem;
-      transition: background 0.2s ease, color 0.2s ease;
-      opacity: 0;
-      animation: fadeIn 2s ease 1s forwards;
-    }
-    .btn:hover {
-      background: #f1f1f1;
-      color: #072c6b;
-    }
+}
+.hero h2 {
+font-size: 2.8rem;
+@@ -93,6 +93,19 @@
+color: #072c6b;
+}
 
     /* Fade away hero as you scroll */
     .hero::after {
@@ -119,73 +53,30 @@ nav a:hover {
       transition: opacity 0.3s ease;
     }
 
-    /* ---------- SECTIONS ---------- */
-    section {
-      padding: 5rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    section h3 {
-      color: #0b3d91;
-      font-size: 1.9rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    .about p, .events p, .contact p, .socials p {
-      text-align: center;
-      line-height: 1.6;
-      font-size: 1.05rem;
-      color: #444;
-    }
-    .socials-icons {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1.5rem;
-    }
-    .socials-icons a img {
-      width: 42px;
-      height: 42px;
-      transition: transform 0.2s ease, filter 0.2s ease;
-      filter: grayscale(100%) brightness(90%);
-    }
-    .socials-icons a img:hover {
-      transform: scale(1.1);
-      filter: none;
-    }
+/* ---------- SECTIONS ---------- */
+section {
+padding: 5rem 2rem;
+@@ -118,7 +131,6 @@
+font-size: 1.05rem;
+color: #444;
+}
 
-    /* ---------- FOOTER ---------- */
-    .footer {
-      background: #0b3d91;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      margin-top: 3rem;
-    }
+.socials-icons {
+display: flex;
+justify-content: center;
+@@ -151,7 +163,6 @@
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
 
-    /* ---------- ANIMATIONS ---------- */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+</style>
 </head>
 <body>
-  <header>
-    <a href="#top">
-      <img src="AIAALogo.png" alt="AIAA SMC Logo">
-    </a>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#socials">Socials</a>
+@@ -160,4 +171,63 @@ <h1>AIAA SMC Student Branch</h1>
+<nav>
+<a href="#about">About</a>
+<a href="#socials">Socials</a>
+      <a href="#events">Eve
       <a href="#events">Events</a>
       <a href="#contact">Contact</a>
     </nav>
