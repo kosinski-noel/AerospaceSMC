@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AIAA SMC Student Initiative</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -651,6 +652,110 @@
       box-shadow: 0 10px 28px rgba(0,0,0,0.3);
     }
 
+    /* ── CODE / RESEARCH SECTION ── */
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: none;
+      border: 2px solid #d0ddf0;
+      color: var(--text-light);
+      padding: 0.55rem 1.3rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tab-btn:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
+    .tab-btn.active { background: var(--blue-dark); border-color: var(--blue-dark); color: white; }
+    .tab-badge {
+      background: var(--accent);
+      color: #1a1a00;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.15rem 0.55rem;
+      border-radius: 50px;
+    }
+    .code-panel { display: none; }
+    .code-panel.active { display: block; }
+    .code-meta {
+      margin-bottom: 1.4rem;
+    }
+    .code-meta h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 0.4rem;
+    }
+    .code-meta p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 740px;
+    }
+    .code-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.7rem;
+    }
+    .code-pill {
+      background: #e8eef8;
+      color: var(--blue-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.75rem;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+    }
+    .code-window {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 14px 50px rgba(11,61,145,0.2);
+    }
+    .code-titlebar {
+      background: #21252b;
+      padding: 0.75rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dots span { width: 12px; height: 12px; border-radius: 50%; display: block; }
+    .dot-red    { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green  { background: #28c840; }
+    .code-filename {
+      margin-left: 0.6rem;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.82rem;
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+    }
+    .code-window pre {
+      margin: 0;
+      max-height: 580px;
+      overflow-y: auto;
+    }
+    .code-window pre code.hljs {
+      border-radius: 0;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      padding: 1.4rem 1.8rem;
+    }
+    .code-window pre::-webkit-scrollbar { width: 6px; }
+    .code-window pre::-webkit-scrollbar-track { background: #282c34; }
+    .code-window pre::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 3px; }
+
     /* ── FOOTER ── */
     footer {
       background: #060d1f;
@@ -694,6 +799,7 @@
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
+      <a href="#research">Research</a>
       <a href="#events">Events</a>
       <a href="#socials">Socials</a>
       <a href="#contact">Contact</a>
@@ -784,6 +890,384 @@
           View PDF
         </a>
       </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH / CODE -->
+  <div class="section-wrapper alt-bg" id="research">
+    <div class="section-inner">
+      <p class="section-label reveal">Active Research</p>
+      <h2 class="section-title reveal">Code &amp; Pipelines</h2>
+      <div class="divider reveal"></div>
+      <p class="section-body reveal">Explore the actual Python code powering our astrophysics research — from single-star flare detection to large-scale open cluster surveys.</p>
+
+      <div class="code-tabs reveal">
+        <button class="tab-btn active" data-tab="pipeline">Light Curve Pipeline</button>
+        <button class="tab-btn" data-tab="scanning">NGC 2516 Scanner <span class="tab-badge">In Development</span></button>
+      </div>
+
+      <!-- PIPELINE PANEL -->
+      <div class="code-panel active" id="tab-pipeline">
+        <div class="code-meta reveal">
+          <h4>Stellar Flare Detection — pipeline.py</h4>
+          <p>Detects and characterizes stellar flares from TESS Target Pixel File (TPF) data. Builds aperture-masked light curves, computes flux-weighted centroids at every cadence, and measures centroid shifts between the pre-flare baseline and the flare peak — revealing whether the emission is on the target star or a nearby contaminant.</p>
+          <div class="code-pills">
+            <span class="code-pill">lightkurve</span>
+            <span class="code-pill">astropy</span>
+            <span class="code-pill">numpy</span>
+            <span class="code-pill">TESS TPF</span>
+            <span class="code-pill">WCS</span>
+          </div>
+        </div>
+        <div class="code-window reveal">
+          <div class="code-titlebar">
+            <div class="code-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="code-filename">pipeline.py</span>
+          </div>
+          <pre><code class="language-python">"""
+flare_ch.py
+-----------
+Detects and characterizes stellar flares from TESS Target Pixel File (TPF) data.
+
+Pipeline overview:
+  1. Load a TESS TPF cutout and generate an aperture-masked light curve.
+  2. Identify the brightest cadence (strongest flare candidate).
+  3. Compute flux-weighted centroids over time using only aperture pixels.
+  4. Measure the centroid shift between the pre-flare baseline and the flare peak.
+  5. Project the target star's sky coordinates onto the pixel grid via WCS.
+
+A significant centroid shift during the flare suggests the emission originates
+from a nearby contaminating source rather than the target star itself.
+"""
+
+from lightkurve import TessTargetPixelFile
+import matplotlib.pyplot as plt
+import numpy as np
+from astropy.coordinates import SkyCoord
+import astropy.units as u
+
+# ---------------------------------------------------------------------------
+# 1. Load data
+# ---------------------------------------------------------------------------
+
+tpf_path = r"/Users/noel/Downloads/AIAA/Star Project/tess-s0080-2-2_270.420554_28.932725_30x30_astrocut.fits"
+tpf = TessTargetPixelFile(tpf_path)
+
+# ---------------------------------------------------------------------------
+# 2. Build aperture mask and light curve
+#
+# The same mask is reused for the light curve, flare detection, and centroid
+# computation to ensure all three are internally consistent.
+# Pixels with flux > 3x the background median are included.
+# ---------------------------------------------------------------------------
+
+aperture_mask = tpf.create_threshold_mask(threshold=3)
+lc = tpf.to_lightcurve(aperture_mask=aperture_mask)
+
+plt.figure(figsize=(10, 4))
+lc.plot()
+plt.show()
+
+# ---------------------------------------------------------------------------
+# 3. Extract raw flux and time arrays
+# ---------------------------------------------------------------------------
+
+flux = tpf.flux.value   # shape: (n_cadences, ny, nx)
+time = tpf.time.value   # shape: (n_cadences,) — TBJD
+
+print("Flux shape:", flux.shape)
+print("Time len:  ", len(time))
+
+# ---------------------------------------------------------------------------
+# 4. Apply aperture mask and detect the strongest flare
+#
+# Non-aperture pixels are set to NaN so they contribute nothing to sums.
+# The cadence with the highest total in-aperture flux is taken as the flare peak.
+# ---------------------------------------------------------------------------
+
+masked_flux = flux.copy()
+masked_flux[:, ~aperture_mask] = np.nan                        # blank out background pixels
+
+aperture_flux = np.nansum(masked_flux, axis=(1, 2))            # total in-aperture flux per cadence
+flare_idx     = np.nanargmax(aperture_flux)                    # index of peak brightness
+
+print("Index of strongest flare:", flare_idx)
+print("Time of strongest flare: ", time[flare_idx])
+
+# ---------------------------------------------------------------------------
+# 5. Compute flux-weighted centroids at every cadence
+#
+# Centroid formula:  x_c = sum(x * F) / sum(F)
+# Computed only over aperture pixels; NaNs are excluded by nansum.
+# ---------------------------------------------------------------------------
+
+ny, nx = flux.shape[1], flux.shape[2]
+y, x   = np.mgrid[0:ny, 0:nx]           # pixel coordinate grids
+
+num_x = np.nansum(x * masked_flux, axis=(1, 2))   # sum(x * F)
+num_y = np.nansum(y * masked_flux, axis=(1, 2))   # sum(y * F)
+den   = np.nansum(masked_flux,     axis=(1, 2))   # sum(F)
+
+centroid_x = num_x / den   # flux-weighted x centroid at each cadence
+centroid_y = num_y / den   # flux-weighted y centroid at each cadence
+
+# ---------------------------------------------------------------------------
+# 6. Select pre-flare baseline index
+#
+# Prefer 10 cadences before the peak. If the flare occurs within the first
+# 10 cadences, fall back to 10 cadences after the peak.
+# NaN frames are skipped in either direction.
+# ---------------------------------------------------------------------------
+
+if flare_idx >= 10:
+    pre_idx = flare_idx - 10
+    while pre_idx > 0 and np.all(np.isnan(masked_flux[pre_idx])):
+        pre_idx -= 1
+else:
+    pre_idx = flare_idx + 10
+    while pre_idx &lt; len(time) - 1 and np.all(np.isnan(masked_flux[pre_idx])):
+        pre_idx += 1
+    print("Warning: flare near start of data; using post-flare frame as baseline")
+
+peak_idx = flare_idx
+while peak_idx > 0 and np.all(np.isnan(masked_flux[peak_idx])):
+    peak_idx -= 1
+
+print("Using pre-flare index:", pre_idx,  "time:", time[pre_idx])
+print("Using peak index:     ", peak_idx, "time:", time[peak_idx])
+
+# ---------------------------------------------------------------------------
+# 7. Measure centroid shift between baseline and flare peak
+# ---------------------------------------------------------------------------
+
+x_pre  = centroid_x[pre_idx]
+y_pre  = centroid_y[pre_idx]
+x_peak = centroid_x[peak_idx]
+y_peak = centroid_y[peak_idx]
+
+print("Centroid BEFORE flare:  x =", x_pre,  " y =", y_pre)
+print("Centroid DURING flare:  x =", x_peak, " y =", y_peak)
+
+dx = x_peak - x_pre
+dy = y_peak - y_pre
+print("Centroid shift (dx, dy) =", dx, dy)
+
+# ---------------------------------------------------------------------------
+# 8. Project target star coordinates onto the pixel grid via WCS
+# ---------------------------------------------------------------------------
+
+wcs           = tpf.wcs
+coord         = SkyCoord(ra=270.420554*u.deg, dec=28.932725*u.deg)   # TIC 1603615314
+x_tic, y_tic  = wcs.world_to_pixel(coord)
+
+print("TIC 1603615314 pixel position:  x =", x_tic, " y =", y_tic)</code></pre>
+        </div>
+      </div>
+
+      <!-- SCANNING PANEL -->
+      <div class="code-panel" id="tab-scanning">
+        <div class="code-meta reveal">
+          <h4>Variable Star Anomaly Detection — scanning.py</h4>
+          <p>An upcoming large-scale pipeline targeting the NGC 2516 open cluster (~400–500 members). It queries Gaia DR3 for cluster membership, cross-matches to the TESS Input Catalog, then bulk-downloads and stitches TESS light curves for every star — building a dataset for automated variability and anomaly detection across hundreds of objects.</p>
+          <div class="code-pills">
+            <span class="code-pill">astroquery</span>
+            <span class="code-pill">lightkurve</span>
+            <span class="code-pill">Gaia DR3</span>
+            <span class="code-pill">TESS TIC</span>
+            <span class="code-pill">pandas</span>
+            <span class="code-pill">NGC 2516</span>
+          </div>
+        </div>
+        <div class="code-window reveal">
+          <div class="code-titlebar">
+            <div class="code-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="code-filename">scanning.py</span>
+          </div>
+          <pre><code class="language-python">"""
+Variable Star Anomaly Detection Pipeline
+Target: NGC 2516 open cluster (~400-500 members)
+Phase 1: Gaia membership query + TESS light curve download
+"""
+
+import pandas as pd
+from pathlib import Path
+from astroquery.gaia import Gaia
+from astroquery.mast import Catalogs
+import lightkurve as lk
+import warnings
+
+warnings.filterwarnings("ignore")
+
+# -- Output directory ----------------------------------------------------------
+DATA_DIR = Path("data/ngc2516")
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+# -- 1. Query Gaia DR3 membership for NGC 2516 ---------------------------------
+# Center: RA=119.52, Dec=-60.75 | Distance ~408 pc -> parallax ~2.45 mas
+# Membership filter: parallax + proper motion box from Cantat-Gaudin 2018
+
+GAIA_QUERY = """
+SELECT
+    source_id,
+    ra,
+    dec,
+    parallax,
+    parallax_error,
+    pmra,
+    pmdec,
+    phot_g_mean_mag,
+    phot_bp_mean_mag,
+    phot_rp_mean_mag,
+    bp_rp,
+    radial_velocity
+FROM gaiadr3.gaia_source
+WHERE CONTAINS(
+    POINT(ra, dec),
+    CIRCLE(119.52, -60.75, 0.75)
+) = 1
+AND parallax BETWEEN 2.1 AND 2.9
+AND pmra    BETWEEN -5.5 AND -3.5
+AND pmdec   BETWEEN 11.0 AND 13.0
+AND phot_g_mean_mag &lt; 14.0
+AND parallax_error &lt; 0.2
+"""
+
+print("Querying Gaia DR3 for NGC 2516 members...")
+job = Gaia.launch_job(GAIA_QUERY)
+gaia_members = job.get_results().to_pandas()
+print(f"  Found {len(gaia_members)} candidate members\n")
+
+gaia_members.to_csv(DATA_DIR / "gaia_members.csv", index=False)
+
+
+# -- 2. Cross-match Gaia sources to TESS Input Catalog (TIC) ------------------
+
+print("Cross-matching to TESS Input Catalog...")
+
+tic_ids  = []
+tic_tmag = []
+
+for _, row in gaia_members.iterrows():
+    result = Catalogs.query_region(
+        f"{row['ra']} {row['dec']}",
+        radius="5s",           # 5 arcsec search radius
+        catalog="TIC"
+    )
+    if len(result) > 0:
+        result.sort("Tmag")    # take brightest match within radius
+        tic_ids.append(int(result["ID"][0]))
+        tic_tmag.append(float(result["Tmag"][0]))
+    else:
+        tic_ids.append(None)
+        tic_tmag.append(None)
+
+gaia_members["tic_id"] = tic_ids
+gaia_members["Tmag"]   = tic_tmag
+
+matched = gaia_members.dropna(subset=["tic_id"])
+matched = matched[matched["Tmag"] &lt; 13.5].reset_index(drop=True)
+matched["tic_id"] = matched["tic_id"].astype(int)
+
+print(f"  {len(matched)} stars matched to TIC with Tmag &lt; 13.5\n")
+matched.to_csv(DATA_DIR / "tic_matched.csv", index=False)
+
+
+# -- 3. Download TESS light curves --------------------------------------------
+# NGC 2516 covered in Sectors 1, 27, 28 (Southern CVZ-adjacent)
+# Priority: 2-min cadence SPOC PDCSAP; fallback to QLP (FFI-based)
+
+TARGET_SECTORS     = [100]
+PREFERRED_AUTHORS  = ["SPOC", "QLP"]
+
+print("Downloading TESS light curves...")
+light_curves = {}
+download_log = []
+
+for _, row in matched.iterrows():
+    tic_id = row["tic_id"]
+    target = f"TIC {tic_id}"
+
+    try:
+        search = lk.search_lightcurve(
+            target,
+            mission="TESS",
+            sector=TARGET_SECTORS,
+            author=PREFERRED_AUTHORS,
+            exptime="short"        # prefer 2-min cadence
+        )
+
+        # Fallback: if no 2-min, accept 10-min (QLP FFI)
+        if len(search) == 0:
+            search = lk.search_lightcurve(
+                target, mission="TESS",
+                sector=TARGET_SECTORS, author="QLP"
+            )
+
+        if len(search) == 0:
+            download_log.append({"tic_id": tic_id, "status": "no_data"})
+            continue
+
+        lc_collection = search.download_all(
+            flux_column="pdcsap_flux",
+            quality_bitmask="hardest"
+        )
+
+        if lc_collection is None or len(lc_collection) == 0:
+            download_log.append({"tic_id": tic_id, "status": "download_failed"})
+            continue
+
+        # Stitch sectors: normalize each to unit median before combining
+        lc_stitched = lc_collection.stitch(corrector_func=lambda lc: lc.normalize())
+
+        lc_clean = (
+            lc_stitched
+            .remove_nans()
+            .remove_outliers(sigma=5.0)
+        )
+
+        if len(lc_clean) &lt; 200:
+            download_log.append({"tic_id": tic_id, "status": "too_short",
+                                  "n_points": len(lc_clean)})
+            continue
+
+        light_curves[tic_id] = lc_clean
+        download_log.append({
+            "tic_id":   tic_id,
+            "status":   "ok",
+            "n_points": len(lc_clean),
+            "sectors":  list(lc_collection.sector) if hasattr(lc_collection, "sector")
+                        else TARGET_SECTORS,
+            "Tmag":     row["Tmag"],
+            "bp_rp":    row["bp_rp"]
+        })
+
+    except Exception as e:
+        download_log.append({"tic_id": tic_id, "status": f"error: {str(e)}"})
+        continue
+
+# -- 4. Summary ----------------------------------------------------------------
+
+log_df = pd.DataFrame(download_log)
+log_df.to_csv(DATA_DIR / "download_log.csv", index=False)
+
+ok = log_df[log_df["status"] == "ok"]
+print(f"Download complete:")
+print(f"  Successfully downloaded: {len(ok)} light curves")
+print(f"  No data available:       {len(log_df[log_df['status'] == 'no_data'])}")
+print(f"  Too short / failed:      {len(log_df) - len(ok) - len(log_df[log_df['status'] == 'no_data'])}")
+print(f"\nLight curves ready for feature extraction: {len(light_curves)}")
+print(f"Data saved to: {DATA_DIR.resolve()}")</code></pre>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -934,6 +1418,18 @@
       });
     }, { threshold: 0.5 });
     counters.forEach(c => counterObserver.observe(c));
+
+    /* ── CODE TAB SWITCHING ── */
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.code-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
