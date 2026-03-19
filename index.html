@@ -45,20 +45,22 @@
       width: 100%;
       top: 0;
       left: 0;
-      background: rgba(11, 61, 145, 0.88);
+      background: rgba(6, 10, 24, 0.45);
       color: white;
-      padding: 0.9rem 3rem;
+      padding: 1rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      transition: padding 0.3s ease, background 0.3s ease;
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
     header.scrolled {
-      padding: 0.6rem 3rem;
-      background: rgba(11, 61, 145, 0.97);
+      padding: 0.65rem 3rem;
+      background: rgba(6, 10, 24, 0.72);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.25);
     }
     header img {
       height: 60px;
