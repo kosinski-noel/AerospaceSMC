@@ -92,6 +92,48 @@
     }
     nav a:hover::after { width: 100%; }
 
+    /* ── PROJECTS ── */
+    .project-feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    @media (max-width: 750px) {
+      .project-feature { grid-template-columns: 1fr; }
+    }
+    .project-img {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(11,61,145,0.15);
+    }
+    .project-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .project-text h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--blue-dark);
+      margin-bottom: 1rem;
+    }
+    .project-text p {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+    .project-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -547,6 +589,7 @@
     <img src="AIAALogo.png" alt="AIAA SMC Logo" />
     <nav>
       <a href="#about">About</a>
+      <a href="#projects">Projects</a>
       <a href="#events">Events</a>
       <a href="#socials">Socials</a>
       <a href="#contact">Contact</a>
@@ -596,26 +639,27 @@
     </div>
   </div>
 
-  <!-- STATS STRIP -->
-  <div class="stats-strip">
-    <div class="stats-inner">
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="50">0<span>+</span></span>
-        <span class="stat-label">Members</span>
-      </div>
-      <div class="stat-item reveal" style="transition-delay:0.15s">
-        <span class="stat-number" data-target="10">0<span>+</span></span>
-        <span class="stat-label">Events Per Year</span>
-      </div>
-      <div class="stat-item reveal" style="transition-delay:0.3s">
-        <span class="stat-number" data-target="1">0<span>+</span></span>
-        <span class="stat-label">Years Active</span>
+  <!-- PROJECTS -->
+  <div class="section-wrapper" id="projects">
+    <div class="section-inner">
+      <p class="section-label reveal">What We're Working On</p>
+      <h2 class="section-title reveal">Projects</h2>
+      <div class="divider reveal"></div>
+      <div class="project-feature">
+        <div class="project-img reveal-left">
+          <img src="graph.png" alt="Light Curve Analysis Graph" />
+        </div>
+        <div class="project-text reveal-right">
+          <span class="project-tag">Astrophysics</span>
+          <h3>Light Curve Analysis</h3>
+          <p>Our members are conducting light curve analysis to study the brightness variations of celestial objects over time. This project applies real observational data to explore stellar phenomena, variable stars, and exoplanet transits — bridging classroom theory with hands-on astronomical research.</p>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- EVENTS -->
-  <div class="section-wrapper" id="events">
+  <div class="section-wrapper alt-bg" id="events">
     <div class="section-inner">
       <p class="section-label reveal">What's Happening</p>
       <h2 class="section-title reveal">Upcoming Events</h2>
