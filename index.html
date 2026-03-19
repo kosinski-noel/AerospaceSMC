@@ -652,6 +652,106 @@
       box-shadow: 0 10px 28px rgba(0,0,0,0.3);
     }
 
+    /* ── SESSION SCHEDULE ── */
+    .session-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+    }
+    .session-row {
+      display: grid;
+      grid-template-columns: 90px 1fr 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 2px 10px rgba(11,61,145,0.07);
+      border-left: 4px solid var(--blue-light);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .session-row:hover { transform: translateX(4px); box-shadow: 0 4px 18px rgba(11,61,145,0.12); }
+    .session-row.completed {
+      border-left-color: #bbb;
+      opacity: 0.62;
+    }
+    .session-row.next-up {
+      border-left-color: var(--accent);
+      background: linear-gradient(135deg, #fffcf0 0%, white 60%);
+      box-shadow: 0 4px 18px rgba(232,192,96,0.2);
+    }
+    .session-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+    }
+    .session-row.completed .session-num { color: #aaa; }
+    .session-row.next-up .session-num { color: #b8860b; }
+    .session-date {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    .session-topic {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .session-status {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .status-done { background: #eee; color: #888; }
+    .status-next { background: var(--accent); color: #1a1a00; }
+    .status-upcoming { background: #dce9f9; color: var(--blue-dark); }
+    .status-tba { background: #f0f0f0; color: #aaa; }
+    @media (max-width: 700px) {
+      .session-row { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+      .session-status { grid-column: 2; justify-self: end; }
+    }
+
+    /* ── DELIVERABLES ── */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .deliverable-card {
+      background: white;
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem;
+      box-shadow: 0 4px 16px rgba(11,61,145,0.09);
+      border-top: 4px solid var(--blue-mid);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+    .deliverable-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(11,61,145,0.14); }
+    .deliverable-card.past { border-top-color: #bbb; opacity: 0.65; }
+    .deliverable-card.urgent { border-top-color: var(--accent); }
+    .deliverable-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .deliverable-due {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 0.7rem;
+      line-height: 1.5;
+    }
+    .deliverable-due strong { color: var(--blue-dark); }
+    .deliverable-card.urgent .deliverable-due strong { color: #b8860b; }
+
     /* ── CODE / RESEARCH SECTION ── */
     .code-tabs {
       display: flex;
@@ -798,10 +898,10 @@
     <img src="AIAALogo.png" alt="AIAA SMC Logo" />
     <nav>
       <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#research">Research</a>
+      <a href="#lightcurve">Light Curve</a>
+      <a href="#competition">Space Design</a>
+      <a href="#research">Code</a>
       <a href="#events">Events</a>
-      <a href="#socials">Socials</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -843,28 +943,40 @@
           <img src="sector92.webp" alt="Aerospace SMC Activity" />
           <div class="photo-card-overlay"><span>Club Activity</span></div>
         </div>
-        <div class="placeholder-card reveal-left" style="transition-delay:0.2s">📸 Coming Soon</div>
-        <div class="placeholder-card reveal-right" style="transition-delay:0.2s">📸 Coming Soon</div>
       </div>
     </div>
   </div>
 
-  <!-- PROJECTS -->
-  <div class="section-wrapper" id="projects">
+  <!-- LIGHT CURVE RESEARCH -->
+  <div class="section-wrapper" id="lightcurve">
     <div class="section-inner">
-      <p class="section-label reveal">What We're Working On</p>
-      <h2 class="section-title reveal">Projects</h2>
+      <p class="section-label reveal">Astrophysics Research</p>
+      <h2 class="section-title reveal">Light Curve Analysis</h2>
       <div class="divider reveal"></div>
       <div class="project-feature">
         <div class="project-img reveal-left">
           <img src="graph.png" alt="Light Curve Analysis Graph" />
         </div>
         <div class="project-text reveal-right">
-          <span class="project-tag">Astrophysics</span>
-          <h3>Light Curve Analysis</h3>
-          <p>Our members are conducting light curve analysis to study the brightness variations of celestial objects over time. This project applies real observational data to explore stellar phenomena, variable stars, and exoplanet transits — bridging classroom theory with hands-on astronomical research.</p>
+          <span class="project-tag">Astrophysics · TESS Data</span>
+          <h3>Stellar Flare Detection &amp; Variable Stars</h3>
+          <p>Our members are working with real TESS satellite data to detect and characterize stellar flares and study brightness variations of celestial objects over time. The pipeline builds aperture-masked light curves, computes flux-weighted centroids, and measures centroid shifts to distinguish on-target flares from nearby contaminants.</p>
+          <p style="margin-top:0.8rem; font-size:0.95rem; color:var(--text-light); line-height:1.7;">An upcoming large-scale extension will survey hundreds of stars in the NGC 2516 open cluster using Gaia DR3 membership data and automated anomaly detection.</p>
+          <div style="margin-top:1.2rem;">
+            <a href="#research" class="btn btn-primary" style="font-size:0.85rem; padding:0.65rem 1.5rem; color:var(--blue-dark);">View the Code</a>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- TEAM SPACE DESIGN COMPETITION -->
+  <div class="section-wrapper alt-bg" id="competition">
+    <div class="section-inner">
+      <p class="section-label reveal">Competition · 2025–2026</p>
+      <h2 class="section-title reveal">AIAA Space Team Design</h2>
+      <div class="divider reveal"></div>
+      <p class="section-body reveal">We are competing in the AIAA Undergraduate Team Space Design Competition — a national challenge where student teams develop a full mission concept and proposal. Read the brief below, and track our upcoming deliverables.</p>
 
       <div class="competition-card reveal">
         <div class="competition-icon">
@@ -877,9 +989,9 @@
           </svg>
         </div>
         <div class="competition-body">
-          <span class="comp-tag">Competition · 2025–2026</span>
-          <h3>AIAA Space Team Design Competition</h3>
-          <p>We are participating in the AIAA Undergraduate Team Space Design Competition. Read the full competition brief to learn about the challenge, requirements, and how our team is approaching the design problem.</p>
+          <span class="comp-tag">Official Competition Brief</span>
+          <h3>2025–2026 Undergraduate Team Space Design</h3>
+          <p>Read the full competition requirements, challenge statement, and submission guidelines from AIAA.</p>
         </div>
         <a href="2025-2026-Undergraduate-Team_Space-Design-Competition.pdf" target="_blank" class="btn-pdf">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -889,6 +1001,38 @@
           </svg>
           View PDF
         </a>
+      </div>
+
+      <div style="margin-top:3.5rem;">
+        <p class="section-label reveal" style="text-align:left; margin-bottom:0.5rem;">Team Deliverables</p>
+        <h3 class="reveal" style="font-size:1.4rem; font-weight:800; color:var(--blue-dark); margin-bottom:2rem;">Upcoming Deadlines</h3>
+        <div class="deliverables-grid">
+          <div class="deliverable-card past reveal" style="transition-delay:0.05s">
+            <div class="deliverable-name">Quad Chart</div>
+            <div class="deliverable-due">Due <strong>Mon, March 16</strong><br>11:59 PM PT</div>
+            <span class="session-status status-done">Submitted</span>
+          </div>
+          <div class="deliverable-card urgent reveal" style="transition-delay:0.1s">
+            <div class="deliverable-name">Org Chart</div>
+            <div class="deliverable-due">Due <strong>Sun, March 22</strong><br>11:59 PM PT</div>
+            <span class="session-status status-next">Due Soon</span>
+          </div>
+          <div class="deliverable-card urgent reveal" style="transition-delay:0.15s">
+            <div class="deliverable-name">Shell Doc</div>
+            <div class="deliverable-due">Due <strong>Sun, March 22</strong><br>11:59 PM PT</div>
+            <span class="session-status status-next">Due Soon</span>
+          </div>
+          <div class="deliverable-card reveal" style="transition-delay:0.2s">
+            <div class="deliverable-name">First Draft of Proposal</div>
+            <div class="deliverable-due">Due <strong>Sun, April 19</strong><br>11:59 PM PT</div>
+            <span class="session-status status-upcoming">Upcoming</span>
+          </div>
+          <div class="deliverable-card reveal" style="transition-delay:0.25s">
+            <div class="deliverable-name">Final Proposal</div>
+            <div class="deliverable-due">Due <strong>Fri, May 15</strong><br>4:59 PM PT</div>
+            <span class="session-status status-upcoming">Upcoming</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1272,26 +1416,73 @@ print(f"Data saved to: {DATA_DIR.resolve()}")</code></pre>
   </div>
 
   <!-- EVENTS -->
-  <div class="section-wrapper alt-bg" id="events">
+  <div class="section-wrapper" id="events">
     <div class="section-inner">
-      <p class="section-label reveal">What's Happening</p>
-      <h2 class="section-title reveal">Upcoming Events</h2>
+      <p class="section-label reveal">Spring 2026 · Every Sunday @ 9:30 PM</p>
+      <h2 class="section-title reveal">Meeting Schedule</h2>
       <div class="divider reveal"></div>
-      <div class="events-grid">
-        <div class="event-card reveal" style="transition-delay:0.05s">
-          <p class="event-tag">Monthly</p>
-          <h4>General Meeting</h4>
-          <p>Join us every first Friday of the month for our general club meeting. Location: TBD.</p>
+      <p class="section-body reveal">Weekly sessions focused on the AIAA Space Design Competition — from onboarding through final proposal submission. All meetings held online.</p>
+
+      <div class="session-list reveal">
+        <div class="session-row completed">
+          <span class="session-num">Session 1</span>
+          <span class="session-date">Mar 1, 2026 · 9:30 PM</span>
+          <span class="session-topic">AIAA Onboarding + Introduction</span>
+          <span class="session-status status-done">Done</span>
         </div>
-        <div class="event-card reveal" style="transition-delay:0.15s">
-          <p class="event-tag">Workshop</p>
-          <h4>Design &amp; Build Workshop</h4>
-          <p>Get hands-on with aerospace engineering concepts. Details coming soon!</p>
+        <div class="session-row completed">
+          <span class="session-num">Session 2</span>
+          <span class="session-date">Mar 8, 2026 · 9:30 PM</span>
+          <span class="session-topic">Quad Charts + Proposal Details</span>
+          <span class="session-status status-done">Done</span>
         </div>
-        <div class="event-card reveal" style="transition-delay:0.25s">
-          <p class="event-tag">Spring 2026</p>
-          <h4>Guest Speaker Series</h4>
-          <p>Hear from engineers and professionals across the aerospace industry. Stay tuned for speaker announcements.</p>
+        <div class="session-row completed">
+          <span class="session-num">Session 3</span>
+          <span class="session-date">Mar 16, 2026 · 9:30 PM</span>
+          <span class="session-topic">Org Chart + Shell Doc</span>
+          <span class="session-status status-done">Done</span>
+        </div>
+        <div class="session-row next-up">
+          <span class="session-num">Session 4</span>
+          <span class="session-date">Mar 22, 2026 · 9:30 PM</span>
+          <span class="session-topic">Review and Brainstorm with Team</span>
+          <span class="session-status status-next">Next Up</span>
+        </div>
+        <div class="session-row">
+          <span class="session-num">Session 5</span>
+          <span class="session-date">Mar 29, 2026 · 9:30 PM</span>
+          <span class="session-topic">LaTeX Code Workshop</span>
+          <span class="session-status status-upcoming">Upcoming</span>
+        </div>
+        <div class="session-row">
+          <span class="session-num">Session 6</span>
+          <span class="session-date">Apr 5, 2026 · 9:30 PM</span>
+          <span class="session-topic">Proposal Writing 1</span>
+          <span class="session-status status-upcoming">Upcoming</span>
+        </div>
+        <div class="session-row">
+          <span class="session-num">Session 7</span>
+          <span class="session-date">Apr 12, 2026 · 9:30 PM</span>
+          <span class="session-topic">Proposal Writing 2</span>
+          <span class="session-status status-upcoming">Upcoming</span>
+        </div>
+        <div class="session-row">
+          <span class="session-num">Session 8</span>
+          <span class="session-date">Apr 19, 2026 · 9:30 PM</span>
+          <span class="session-topic">Proposal Writing 3</span>
+          <span class="session-status status-upcoming">Upcoming</span>
+        </div>
+        <div class="session-row">
+          <span class="session-num">Session 9</span>
+          <span class="session-date">TBA</span>
+          <span class="session-topic">Proposal Writing 4</span>
+          <span class="session-status status-tba">TBA</span>
+        </div>
+        <div class="session-row">
+          <span class="session-num">Session 10</span>
+          <span class="session-date">TBA</span>
+          <span class="session-topic">Review / Closeout</span>
+          <span class="session-status status-tba">TBA</span>
         </div>
       </div>
     </div>
@@ -1308,10 +1499,6 @@ print(f"Data saved to: {DATA_DIR.resolve()}")</code></pre>
         <a href="https://discord.gg/8U5da9dbkW" target="_blank" class="social-card reveal" style="transition-delay:0.1s">
           <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord" />
           <span>Discord</span>
-        </a>
-        <a href="https://www.instagram.com/aiaa.smc/" target="_blank" class="social-card reveal" style="transition-delay:0.2s">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
-          <span>Instagram</span>
         </a>
       </div>
     </div>
